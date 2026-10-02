@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialApp</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+</head>
+<body class="bg-base-200 min-h-screen">
+
+    <!-- Navbar -->
+    <div class="navbar bg-base-100 shadow-md px-6">
+        <div class="flex-1">
+            <a href="{% url 'feed' %}" class="text-xl font-bold text-primary">SocialApp</a>
+        </div>
+        <div class="flex-none gap-2">
+
+            <!-- Search -->
+            <form method="GET" action="{% url 'search' %}" class="flex gap-2">
+                <input
+                    type="text"
+                    name="q"
+                    class="input input-bordered input-sm w-40"
+                    placeholder="Search..."
+                />
+                <button type="submit" class="btn btn-sm btn-ghost">🔍</button>
+            </form>
+
+            {% if request.user.is_authenticated %}
+                <!-- Notification Bell -->
+                <a href="{% url 'notifications' %}" class="btn btn-ghost btn-circle">
+                    <div class="indicator">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                    </div>
+                </a>
+                <a href="{% url 'profile' request.user.username %}" class="btn btn-ghost">Profile</a>
+                <a href="{% url 'logout' %}" class="btn btn-error btn-outline">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                <a href="{% url 'register' %}" class="btn btn-outline">Register</a>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-2xl">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} mb-4">
+                    <span>{{ message }}</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>

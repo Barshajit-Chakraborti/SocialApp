@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card bg-base-100 shadow-md mb-6">
+    <div class="card-body">
+        <div class="flex items-center gap-6">
+            <div class="avatar">
+                <div class="w-20 rounded-full">
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" />
+                    {% else %}
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed={{ profile.user.username }}" />
+                    {% endif %}
+                </div>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold">{{ profile.user.username }}</h2>
+                <p class="text-gray-500">{{ profile.bio }}</p>
+                <div class="flex gap-4 mt-2">
+                    <span><strong>{{ profile.get_followers_count }}</strong> Followers</span>
+                    <span><strong>{{ profile.get_following_count }}</strong> Following</span>
+                    <span><strong>{{ posts.count }}</strong> Posts</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            {% if request.user == profile.user %}
+                <a href="{% url 'edit_profile' %}" class="btn btn-outline btn-sm">Edit Profile</a>
+            {% else %}
+                <a href="{% url 'follow' profile.user.username %}" class="btn btn-primary btn-sm">
+                    {% if request.user in profile.followers.all %}
+                        Unfollow
+                    {% else %}
+                        Follow
+                    {% endif %}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- User Posts -->
+{% for post in posts %}
+<div class="card bg-base-100 shadow-md mb-4">
+    <div class="card-body">
+        <p>{{ post.content }}</p>
+        {% if post.image %}
+            <img src="{{ post.image.url }}" class="rounded-xl w-full" />
+        {% endif %}
+        <div class="flex gap-4 mt-2">
+            <span>❤️ {{ post.get_likes_count }}</span>
+            <span>💬 {{ post.comments.count }}</span>
+            <span class="text-xs text-gray-500">{{ post.created_at|timesince }} ago</span>
+        </div>
+    </div>
+</div>
+{% empty %}
+<p class="text-center text-gray-500">No posts yet!</p>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Search Bar -->
+<div class="card bg-base-100 shadow-md mb-6">
+    <div class="card-body">
+        <form method="GET" action="{% url 'search' %}" class="flex gap-3">
+            <input
+                type="text"
+                name="q"
+                value="{{ query }}"
+                class="input input-bordered flex-1"
+                placeholder="Search users or posts..."
+                autofocus
+            />
+            <button type="submit" class="btn btn-primary">🔍 Search</button>
+        </form>
+    </div>
+</div>
+
+{% if query %}
+
+    <!-- Users Results -->
+    <h2 class="text-xl font-bold mb-3">👤 Users</h2>
+    {% if users %}
+        {% for user in users %}
+        <div class="card bg-base-100 shadow-md mb-3">
+            <div class="card-body flex flex-row items-center gap-4">
+                <div class="avatar">
+                    <div class="w-12 rounded-full">
+                        {% if user.profile.profile_picture %}
+                            <img src="{{ user.profile.profile_picture.url }}" />
+                        {% else %}
+                            <img src="https://api.dicebear.com/7.x/initials/svg?seed={{ user.username }}" />
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <a href="{% url 'profile' user.username %}" class="font-bold hover:underline text-lg">
+                        {{ user.username }}
+                    </a>
+                    <p class="text-sm text-gray-500">{{ user.profile.bio }}</p>
+                </div>
+                {% if request.user.is_authenticated and request.user != user %}
+                <a href="{% url 'follow' user.username %}" class="btn btn-sm btn-primary">
+                    {% if request.user in user.profile.followers.all %}
+                        Unfollow
+                    {% else %}
+                        Follow
+                    {% endif %}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-gray-500 mb-6">No users found for "{{ query }}"</p>
+    {% endif %}
+
+    <!-- Posts Results -->
+    <h2 class="text-xl font-bold mb-3 mt-6">📝 Posts</h2>
+    {% if posts %}
+        {% for post in posts %}
+        <div class="card bg-base-100 shadow-md mb-4">
+            <div class="card-body">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="avatar">
+                        <div class="w-10 rounded-full">
+                            {% if post.user.profile.profile_picture %}
+                                <img src="{{ post.user.profile.profile_picture.url }}" />
+                            {% else %}
+                                <img src="https://api.dicebear.com/7.x/initials/svg?seed={{ post.user.username }}" />
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div>
+                        <a href="{% url 'profile' post.user.username %}" class="font-bold hover:underline">
+                            {{ post.user.username }}
+                        </a>
+                        <p class="text-xs text-gray-500">{{ post.created_at|timesince }} ago</p>
+                    </div>
+                </div>
+                <p>{{ post.content }}</p>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="rounded-xl w-full mt-2" />
+                {% endif %}
+                <div class="flex gap-4 mt-3">
+                    <span>❤️ {{ post.get_likes_count }}</span>
+                    <span>💬 {{ post.comments.count }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-gray-500">No posts found for "{{ query }}"</p>
+    {% endif %}
+
+{% else %}
+    <div class="text-center text-gray-500 mt-10">
+        <p class="text-4xl mb-4">🔍</p>
+        <p class="text-xl">Search for users or posts</p>
+    </div>
+{% endif %}
+
+{% endblock %}

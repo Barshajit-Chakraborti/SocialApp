@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card bg-base-100 shadow-md max-w-md mx-auto">
+    <div class="card-body">
+        <h2 class="card-title text-2xl mb-4">Edit Profile</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-control mb-3">
+                <label class="label">Bio</label>
+                <textarea name="bio" class="textarea textarea-bordered" rows="3">{{ profile.bio }}</textarea>
+            </div>
+            <div class="form-control mb-5">
+                <label class="label">Profile Picture</label>
+                <input type="file" name="profile_picture" class="file-input file-input-bordered" />
+            </div>
+            <button type="submit" class="btn btn-primary w-full">Save Changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
