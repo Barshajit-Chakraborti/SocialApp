@@ -16,16 +16,16 @@ A full-stack social media web application built with Django and Tailwind CSS.
 
 ## 🛠️ Tech Stack
 
-- **Backend:** Django 6.x (Python)
+- **Backend:** Django (Python)
 - **Frontend:** Tailwind CSS + DaisyUI
-- **Database:** SQLite (development) / PostgreSQL (production)
+- **Database:** SQLite (development)
 - **Storage:** Pillow for image handling
 
 ## ⚙️ How to Run Locally
 
 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/socialapp.git
+git clone https://github.com/Barshajit-Chakraborti/SocialApp
 cd socialapp
 ```
 
@@ -59,10 +59,10 @@ python manage.py tailwind start
 python manage.py runserver
 ```
 
-7. Visit http://127.0.0.1:8000
+
 
 ## 📸 Screenshots
 (Add screenshots of your app here)
 
 ## 👤 Author
-Your Name — your.email@gmail.com
+Barshajit : chakrabortibarshajit@gmail.com
