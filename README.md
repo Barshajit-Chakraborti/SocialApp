@@ -60,9 +60,5 @@ python manage.py runserver
 ```
 
 
-
-## 📸 Screenshots
-(Add screenshots of your app here)
-
 ## 👤 Author
 Barshajit : chakrabortibarshajit@gmail.com
