@@ -1,6 +1,6 @@
 # SocialApp 🌐
 
-A full-stack social media web application built with **Django** and **Tailwind CSS (DaisyUI)**. Share posts, follow people, and stay up to date with a personalized feed and real-time-style notifications.
+A full-stack social media web application built with **Django** and **Tailwind CSS**. Share posts, follow people, and stay up to date with a personalized feed and real-time-style notifications.
 
 ## 🚀 Features
 
@@ -36,14 +36,6 @@ A full-stack social media web application built with **Django** and **Tailwind C
 | Tooling   | Node.js / npm (for the Tailwind build)    |
 
 ---
-
-## 📸 Screenshots
-
-> Add screenshots to a `docs/screenshots/` folder and reference them here.
-
-| Home Feed | Profile | Notifications |
-|-----------|---------|---------------|
-| ![Feed](docs/screenshots/feed.png) | ![Profile](docs/screenshots/profile.png) | ![Notifications](docs/screenshots/notifications.png) |
 
 ---
 
@@ -125,19 +117,6 @@ python manage.py runserver
 
 ---
 
-## 🔧 Configuration
-
-For anything beyond local development, don't use the default settings. Before deploying:
-
-- Move `SECRET_KEY` out of `settings.py` and into an environment variable
-- Set `DEBUG = False`
-- Configure `ALLOWED_HOSTS`
-- Switch from SQLite to a production database such as PostgreSQL
-- Configure `MEDIA_ROOT` / `MEDIA_URL` and serve uploaded files properly
-- Run `python manage.py tailwind build` to produce the production CSS
-
----
-
 ## 💡 Usage
 
 1. **Sign up** for an account and set up your profile picture.
@@ -149,16 +128,6 @@ For anything beyond local development, don't use the default settings. Before de
 The Django admin panel is available at `/admin/` using your superuser credentials.
 
 ---
-
-## 🗺️ Roadmap
-
-- [ ] Direct messaging
-- [ ] Hashtags and trending topics
-- [ ] Image/video attachments in posts
-- [ ] Real-time notifications (WebSockets)
-- [ ] REST API
-- [ ] Docker setup
-- [ ] Automated tests and CI
 
 ---
 
@@ -174,10 +143,6 @@ Contributions, issues and feature requests are welcome!
 
 ---
 
-## 📄 License
-
-No license has been specified yet. Add a `LICENSE` file (for example [MIT](https://choosealicense.com/licenses/mit/)) to let others know how they can use this project.
-
 ---
 
 ## 👤 Author
@@ -188,5 +153,3 @@ No license has been specified yet. Add a `LICENSE` file (for example [MIT](https
 - Email: [chakrabortibarshajit@gmail.com](mailto:chakrabortibarshajit@gmail.com)
 
 ---
-
-⭐ If you found this project useful, consider giving it a star!
