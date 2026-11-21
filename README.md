@@ -99,8 +99,6 @@ python manage.py tailwind start
 # Terminal 2 – run the Django server
 python manage.py runserver
 
-Open http://127.0.0.1:8000/ in your browser.
-
 🔧 Configuration
 
 For anything beyond local development, don't use the default settings. Before deploying:
